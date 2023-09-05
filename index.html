@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,5 +10,27 @@
 </head>
 <body>
     
+    <div class="title">
+            <h1>library</h1>
+    </div>
+    <div class="container">
+        <button id="showDialog">+ Add Book</button>
+        <dialog id="modal">
+            <form>
+                <input type="text" id="title" placeholder="Title">
+                <input type="text" id="author" placeholder="Author">
+                <input type="number" id="pages" placeholder="Pages">
+                <div>
+                    <label for="read">WHAT</label>
+                    <input type="checkbox" id="read">
+                </div>
+                <div>
+                    <button id="confirm-btn" value="default">Confirm</button>
+                </div>
+            </form>
+        </dialog>
+
+        <output></output>
+    </div>
 </body>
 </html>
