@@ -24,9 +24,12 @@ function addBookToLibrary(book) {
 
 const showButton = document.getElementById("showDialog");
 const bookDialog = document.getElementById("modal");
+const confirmButton = bookDialog.querySelector("#confirm-btn");
 
 //const ConfirmButton = bookDialog.querySelector("#confirm-btn");
 
 showButton.addEventListener("click", () => {
     bookDialog.showModal();
 });
+
+

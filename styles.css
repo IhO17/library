@@ -28,3 +28,9 @@ form {
     display: flex;
     flex-direction: column;
 }
+
+#modal {
+    border-radius: 10px;
+    background-color: yellow;
+    
+}
