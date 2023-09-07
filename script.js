@@ -22,7 +22,7 @@ function addBookToLibrary(book) {
 //
 //console.log(myLibrary)
 
-const showButton = document.getElementById("showDialog");
+const showButton = document.getElementById("showDialogButton");
 const bookDialog = document.getElementById("modal");
 const confirmButton = bookDialog.querySelector("#confirm-btn");
 

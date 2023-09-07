@@ -10,27 +10,31 @@
 </head>
 <body>
     
-    <div class="title">
-            <h1>library</h1>
+    <div class="header">
+        <div class="title">
+                <h1>library</h1>
+        </div>
     </div>
     <div class="container">
-        <button id="showDialog">+ Add Book</button>
+        <button id="showDialogButton">+ Add Book</button>
         <dialog id="modal">
             <form>
-                <input type="text" id="title" placeholder="Title">
-                <input type="text" id="author" placeholder="Author">
-                <input type="number" id="pages" placeholder="Pages">
-                <div>
-                    <label for="read">WHAT</label>
+                <p class="modalPrompt">Add new book:</p>
+                <input class="modalPrompt" type="text" id="title" placeholder="Title">
+                <input class="modalPrompt" type="text" id="author" placeholder="Author">
+                <input class="modalPrompt" type="number" id="pages" placeholder="Pages">
+                <div class="modalPrompt">
+                    <label for="read">Have you read the book?</label>
                     <input type="checkbox" id="read">
                 </div>
-                <div>
+                <div id="confirmDiv" class="modalPrompt">
                     <button id="confirm-btn" value="default">Confirm</button>
                 </div>
             </form>
         </dialog>
 
         <output></output>
+        <div class="books"></div>
     </div>
 </body>
 </html>
