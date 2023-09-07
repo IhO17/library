@@ -24,8 +24,8 @@ function addBookToLibrary(book) {
 
 const showButton = document.getElementById("showDialogButton");
 const bookDialog = document.getElementById("modal");
-const confirmButton = bookDialog.querySelector("#confirm-btn");
-
+const confirmButton = document.querySelector("#confirm-btn");
+const bookSection = document.querySelector("books");
 //const ConfirmButton = bookDialog.querySelector("#confirm-btn");
 
 showButton.addEventListener("click", () => {
@@ -33,3 +33,7 @@ showButton.addEventListener("click", () => {
 });
 
 
+confirmButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log(e);
+});
