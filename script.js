@@ -128,48 +128,40 @@ function printBook(title, author, pages) {
     addBtn.appendChild(addbutton);
     addBtn.appendChild(addDelete);
 
+    bookButtonEvents();
+
+}
+
+function bookButtonEvents () {
     const readButton = document.querySelector(".read-btn");
     const deleteButton = document.querySelector(".delete-btn");
+    
+    //read button :hover effect
+    readButton.addEventListener('mouseover', () => {
+        readButton.style.backgroundColor = "#16a34a8b";
+    })
+    readButton.addEventListener('mouseout', () => {
+        readButton.style.backgroundColor = "#16a34a";
+    })
+    //delete button :hover effect
+    deleteButton.addEventListener('mouseover', () => {
+        deleteButton.style.backgroundColor = "#dc262662";
+    })
+    deleteButton.addEventListener('mouseout', () => {
+        deleteButton.style.backgroundColor = "#dc2626";
+    })
 
     readButton.addEventListener("click", () => {
-        //add function to change state of READ
-        console.log("heh");
-    })
-
-    //add another button for deletion
-    
-    const ReButton = document.querySelector('.read-btn');
-    const DelButton = document.querySelector('.delete-btn');
-
-    
-    ReButton.addEventListener('mouseover', () => {
-        ReButton.style.backgroundColor = "#16a34a8b";
-    })
-
-    ReButton.addEventListener('mouseout', () => {
-        ReButton.style.backgroundColor = "#16a34a";
-    })
-
-    DelButton.addEventListener('mouseover', () => {
-        DelButton.style.backgroundColor = "#dc262662";
-    })
-
-    DelButton.addEventListener('mouseout', () => {
-        DelButton.style.backgroundColor = "#dc2626";
-    })
-    
-    ReButton.addEventListener("click", () => {
-        if (addbutton.textContent === "Read") {
-            addbutton.textContent = "Not Read";
+        if (readButton.textContent === "Read") {
+            readButton.textContent = "Not Read";
         } else {
-            addbutton.textContent = "Read";
+            readButton.textContent = "Read";
         }
     })
 
-    DelButton.addEventListener("click", () => {
-        
-    })
+    deleteButton.addEventListener("click", () => {
 
+    })
 }
 
 function styleButton(button) {   
