@@ -41,12 +41,43 @@ function confirmBtn(e) {
     const pages = bookDialog.querySelector("#pages");
     const read = bookDialog.querySelector("#read");
     let book = new Book(title.value, author.value, pages.value, read.value);
-    //addBookToLibrary(book);
-    printBook(title, author, pages, read);
+    addBookToLibrary(book);
+    printBook(title, author, pages);
+    console.log(myLibrary);
     bookDialog.close();
 }
 
-function printBook(title, author, pages, read) {
+function deleteLibrary () {
+    const books = document.querySelector("#books");
+    const book = books.querySelectorAll("div");
+    book.forEach(div => div.remove());
+}
+
+//function printLibrary() {
+//
+//    myLibrary.forEach(book => {
+//        const addbook = document.createElement("div");
+//        addbook.style.backgroundColor = "#3b82f6";
+//        addbook.style.borderRadius = "15px";
+//        addbook.style.color = "white";
+//        addbook.style.fontSize = "1.7rem";
+//        addbook.style.padding = "30px 20px 20px 30px";
+//        addbook.classList.add(`book-${book.title}`);
+//        bookSection.appendChild(addbook);
+//        const bookWindow = document.querySelector(`.book-${book.title}`);
+//        
+//        for (let value in book) {
+//            
+//            const addline = document.createElement("div");
+//            addline.style.margin = "10px";
+//            addline.style.textAlign = "center";
+//            addline.textContent = `${book[value]}`;
+//            bookWindow.appendChild(addline);
+//        }
+//    })
+//}
+
+function printBook(title, author, pages) {
     const addbook = document.createElement("div");
     addbook.style.backgroundColor = "#fbda4a";
     addbook.style.borderRadius = "15px";
@@ -79,6 +110,7 @@ function printBook(title, author, pages, read) {
     buttonDiv.classList = "btn-div";
     buttonDiv.style.display = "flex";
     buttonDiv.style.justifyContent = "space-around";
+    buttonDiv.style.marginTop = "40px";
 
     bookWindow.appendChild(buttonDiv);
     let addBtn = document.querySelector(".btn-div");
@@ -126,6 +158,18 @@ function printBook(title, author, pages, read) {
         DelButton.style.backgroundColor = "#dc2626";
     })
     
+    ReButton.addEventListener("click", () => {
+        if (addbutton.textContent === "Read") {
+            addbutton.textContent = "Not Read";
+        } else {
+            addbutton.textContent = "Read";
+        }
+    })
+
+    DelButton.addEventListener("click", () => {
+        
+    })
+
 }
 
 function styleButton(button) {   
@@ -139,33 +183,4 @@ function styleButton(button) {
     button.style.borderRadius = "10px";
 }
 
-//function printLibrary() {
-//
-//    myLibrary.forEach(book => {
-//        const addbook = document.createElement("div");
-//        addbook.style.backgroundColor = "#3b82f6";
-//        addbook.style.borderRadius = "15px";
-//        addbook.style.color = "white";
-//        addbook.style.fontSize = "1.7rem";
-//        addbook.style.padding = "30px 20px 20px 30px";
-//        addbook.classList.add(`book-${book.title}`);
-//        bookSection.appendChild(addbook);
-//        const bookWindow = document.querySelector(`.book-${book.title}`);
-//        
-//        for (let value in book) {
-//            
-//            const addline = document.createElement("div");
-//            addline.style.margin = "10px";
-//            addline.style.textAlign = "center";
-//            addline.textContent = `${book[value]}`;
-//            bookWindow.appendChild(addline);
-//        }
-//    })
-//}
-//
-//function removeLibrary() {
-//    const elements = bookSection.querySelectorAll("div");
-//    elements.forEach((div) => {
-//            bookSection.removeChild("div");
-//    })
-//}
+
