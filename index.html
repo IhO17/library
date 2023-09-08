@@ -18,11 +18,11 @@
     <div class="container">
         <button id="showDialogButton">+ Add Book</button>
         <dialog id="modal">
-            <form>
+            <form id="myForm">
                 <p class="modalPrompt">Add new book:</p>
-                <input class="modalPrompt" type="text" id="title" placeholder="Title">
-                <input class="modalPrompt" type="text" id="author" placeholder="Author">
-                <input class="modalPrompt" type="number" id="pages" placeholder="Pages">
+                <input class="modalPrompt" type="text" id="title" placeholder="Title" required>
+                <input class="modalPrompt" type="text" id="author" placeholder="Author" required>
+                <input class="modalPrompt" type="number" id="pages" placeholder="Pages" required>
                 <div class="modalPrompt">
                     <label for="read">Have you read the book?</label>
                     <input type="checkbox" id="read">
