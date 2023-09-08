@@ -7,25 +7,27 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-function addBookToLibrary(book) {
-    myLibrary.push(book);
+Book.prototype.changeRead = function() {
+    this.read = !this.read;
 }
 
 const showButton = document.getElementById("showDialogButton");
 const bookDialog = document.getElementById("modal");
 const confirmButton = document.querySelector("#confirm-btn");
-const bookSection = document.querySelector("#books");
 const cancelButton = document.querySelector("#cancel-btn");
 
+const title = bookDialog.querySelector("#title");
+const author = bookDialog.querySelector("#author");
+const pages = bookDialog.querySelector("#pages");
 
 showButton.addEventListener("click", () => {
     bookDialog.showModal();
     document.getElementById("myForm").reset();
 });
 
-
 confirmButton.addEventListener("click", (e) => {
-    confirmBtn(e);
+    e.preventDefault();
+    addBookToLibrary(e);
 });
 
 cancelButton.addEventListener("click", (e) => {
@@ -33,63 +35,53 @@ cancelButton.addEventListener("click", (e) => {
     bookDialog.close();
 });
 
-function confirmBtn(e) {
-    e.preventDefault();
+function addBookToLibrary(e) {
     
-    const title = bookDialog.querySelector("#title");
-    const author = bookDialog.querySelector("#author");
-    const pages = bookDialog.querySelector("#pages");
-    const read = bookDialog.querySelector("#read");
-
-    let readStatus = "NOT READ";
-
     if (read.checked == true) {
-        readStatus = "READ";
+        readStatus = true;
+    } else {
+        readStatus = false;
     }
-    
+
     let book = new Book(title.value, author.value, pages.value, readStatus);
-    addBookToLibrary(book);
-    printBook(title, author, pages);
+    myLibrary.push(book);
     console.log(myLibrary);
     bookDialog.close();
+
+    printLibrary();
 }
 
-function deleteLibrary () {
-    const books = document.querySelector("#books");
-    const book = books.querySelectorAll("div");
-    book.forEach(div => div.remove());
+function removeBook(index) {
+    myLibrary.splice(index, 1);
+    printLibrary();
+    console.log("test");
 }
 
-//function printLibrary() {
-//
-//    myLibrary.forEach(book => {
-//        const addbook = document.createElement("div");
-//        addbook.style.backgroundColor = "#3b82f6";
-//        addbook.style.borderRadius = "15px";
-//        addbook.style.color = "white";
-//        addbook.style.fontSize = "1.7rem";
-//        addbook.style.padding = "30px 20px 20px 30px";
-//        addbook.classList.add(`book-${book.title}`);
-//        bookSection.appendChild(addbook);
-//        const bookWindow = document.querySelector(`.book-${book.title}`);
-//        
-//        for (let value in book) {
-//            
-//            const addline = document.createElement("div");
-//            addline.style.margin = "10px";
-//            addline.style.textAlign = "center";
-//            addline.textContent = `${book[value]}`;
-//            bookWindow.appendChild(addline);
-//        }
-//    })
-//}
+function changeRead(index) {
+    myLibrary[index].changeRead();
+    printLibrary();
+}
 
-function printBook(title, author, pages) {
+function printLibrary() {
+    
+    const bookSection = document.querySelector("#books");
+    bookSection.innerHTML = "";
+    
+    for (let i = 0; i < myLibrary.length; i++) {
+        let book = myLibrary[i];
+        let bookElement = document.createElement("div");
+        styleBookContainer(bookElement);
+        bookElement.innerHTML = `
+            <p>${book.title}</p>
+            <p>${book.author}</p>
+            <p>${book.pages} pages</p>
+            <p>${book.read ? "Read" : "Not Read Yet"}</p>
+            <button class="read-btn" onclick="changeRead(${i})">Toggle Read</button>
+            <button class="remove-btn" onclick="removeBook(${i})">Remove</button>
+        `;
+        bookSection.appendChild(bookElement);
 
-    createBookContainer();
-    addBookText(title, author, pages);
-    createBookButtons();
-    readDeleteButtonEvents();
+    }
 }
 
 function readDeleteButtonEvents () {
@@ -126,54 +118,27 @@ function readDeleteButtonEvents () {
     })
 }
 
-function createBookContainer() {
-    //create empty div for a single book entry
-    const addbook = document.createElement("div");
-    addbook.style.backgroundColor = "#fbda4a";
-    addbook.style.borderRadius = "15px";
-    addbook.style.color = "black";
-    addbook.style.fontSize = "1.7rem";
-    addbook.style.padding = "20px 20px 10px 30px";
-    addbook.classList.add(`book-${title.value}`);
-    bookSection.appendChild(addbook);
-}
-
-function styleButtonRead(button) {   
-    button.classList = "read-btn";
-    button.style.height = "38px";
-    button.style.width = "120px";
-    button.style.marginTop = "30px";
-    button.style.fontSize = "1.3rem";
-    button.style.color = "white";
-    button.style.backgroundColor = "#16a34a";
-    button.style.borderRadius = "10px";
-    button.textContent = "Read";
-}
-
-function styleButtonDelete(button) {   
-    button.classList = "delete-btn";
-    button.style.height = "38px";
-    button.style.width = "120px";
-    button.style.marginTop = "30px";
-    button.style.fontSize = "1.3rem";
-    button.style.color = "white";
-    button.style.backgroundColor = "#dc2626";
-    button.style.borderRadius = "10px";
-    button.textContent = "Delete";
+function styleBookContainer(cont) {
+    cont.style.backgroundColor = "#fbda4a";
+    cont.style.borderRadius = "15px";
+    cont.style.color = "black";
+    cont.style.fontSize = "1.7rem";
+    cont.style.padding = "20px 20px 10px 30px";
+    //cont.classList.add(`book-${title.value}`);
 }
 
 function createBookButtons() {
     const bookWindow = document.querySelector(`.book-${title.value}`);
-    let buttonDiv = document.createElement("div");
+    const buttonDiv = document.createElement("div");
     
-    buttonDiv.classList = `btn-div-${title.value}`;
+    buttonDiv.classList = `btn-div`;
     buttonDiv.style.display = "flex";
     buttonDiv.style.justifyContent = "space-around";
-    buttonDiv.style.marginTop = "40px";
+    
     
     bookWindow.appendChild(buttonDiv);
-    let addBtn = document.querySelector(`.btn-div-${title.value}`);
 
+    let addBtn = document.querySelector(`.btn-div`);
     let addRead = document.createElement("button");
     let addDelete = document.createElement("button");
     
@@ -182,26 +147,4 @@ function createBookButtons() {
 
     addBtn.appendChild(addRead);
     addBtn.appendChild(addDelete);
-}
-
-function addBookText(title, author, pages) {
-    
-    //selects container
-    const bookWindow = document.querySelector(`.book-${title.value}`);
-
-    for (x in arguments) {
-        let addline = document.createElement("div");
-        addline.style.margin = "10px";
-        addline.style.textAlign = "center";
-
-        //add "pages" when needed
-        if (arguments[x] === pages) {
-            addline.textContent = `${arguments[x].value} pages`;
-        } else {
-            addline.textContent = `${arguments[x].value}`;
-        }
-
-        bookWindow.appendChild(addline);
-    }
-
 }

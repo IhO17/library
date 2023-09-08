@@ -7,6 +7,11 @@ body {
     margin: 0;
 }
 
+p {
+    text-align: center;
+    margin: 10px;
+}
+
 .header {
     display: flex;
     justify-content: center;
@@ -82,7 +87,6 @@ form {
 form p {
     font-weight: 700;
     text-align: center;
-    padding-bottom: 10px;
 }
 
 #buttonDiv {   
@@ -128,3 +132,22 @@ form p {
     background-color: #a5f3fc;
 }
 
+.remove-btn {
+    height: 38px;
+    width: 100px;
+    margin-top: 30px;
+    font-size: 1.3rem;
+    color: white;
+    background-color: #dc2626;
+    border-radius:10px;
+}
+
+.read-btn {
+    height:38px;
+    width:180px;
+    margin-top: 30px;
+    font-size: 1.3rem;
+    color: white;
+    background-color: #16a34a;
+    border-radius: 10px;
+}
