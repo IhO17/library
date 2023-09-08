@@ -40,7 +40,14 @@ function confirmBtn(e) {
     const author = bookDialog.querySelector("#author");
     const pages = bookDialog.querySelector("#pages");
     const read = bookDialog.querySelector("#read");
-    let book = new Book(title.value, author.value, pages.value, read.value);
+
+    let readStatus = "NOT READ";
+
+    if (read.checked == true) {
+        readStatus = "READ";
+    }
+    
+    let book = new Book(title.value, author.value, pages.value, readStatus);
     addBookToLibrary(book);
     printBook(title, author, pages);
     console.log(myLibrary);
@@ -80,16 +87,12 @@ function deleteLibrary () {
 function printBook(title, author, pages) {
 
     createBookContainer();
-
     addBookText(title, author, pages);
-
     createBookButtons();
-
-    addButtonEvents();
-
+    readDeleteButtonEvents();
 }
 
-function addButtonEvents () {
+function readDeleteButtonEvents () {
     const readButton = document.querySelector(".read-btn");
     const deleteButton = document.querySelector(".delete-btn");
     
