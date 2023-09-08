@@ -11,17 +11,6 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-//let book1 = new Book("Golum", "JRR", 302, "not read");
-//let book2 = new Book("HP", "Rofling", 452, "read");
-//let book3 = new Book("PEP", "Rofling", 452, "read");
-//let book4 = new Book("Kskek", "Rofling", 452, "read");
-//
-//addBookToLibrary(book1);
-//addBookToLibrary(book2);
-//addBookToLibrary(book3);
-//addBookToLibrary(book4);
-
-
 const showButton = document.getElementById("showDialogButton");
 const bookDialog = document.getElementById("modal");
 const confirmButton = document.querySelector("#confirm-btn");
@@ -35,18 +24,7 @@ showButton.addEventListener("click", () => {
 
 
 confirmButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    
-    const title = bookDialog.querySelector("#title");
-    const author = bookDialog.querySelector("#author");
-    const pages = bookDialog.querySelector("#pages");
-    const read = bookDialog.querySelector("#read");
-    let book = new Book(title.value, author.value, pages.value, read.value);
-    //addBookToLibrary(book);
-    printBook(title, author, pages, read);
-    bookDialog.close();
-    //removeLibrary();
-    //printLibrary();
+    confirmBtn(e);
 });
 
 cancelButton.addEventListener("click", (e) => {
@@ -60,7 +38,7 @@ function printBook(title, author, pages, read) {
     addbook.style.borderRadius = "15px";
     addbook.style.color = "white";
     addbook.style.fontSize = "1.7rem";
-    addbook.style.padding = "30px 20px 20px 30px";
+    addbook.style.padding = "20px 20px 10px 30px";
     addbook.classList.add(`book-${title.value}`);
     bookSection.appendChild(addbook);
     const bookWindow = document.querySelector(`.book-${title.value}`);
@@ -73,6 +51,33 @@ function printBook(title, author, pages, read) {
         addline.textContent = `${arguments[x].value}`;
         bookWindow.appendChild(addline);
     }
+
+    let addbutton = document.createElement("button");
+    addbutton.classList = "read-btn";
+    addbutton.style.height = "38px";
+    addbutton.style.width = "120px";
+    addbutton.style.marginTop = "30px";
+    addbutton.style.fontSize = "1.5rem";
+    addbutton.style.backgroundColor = "#fde047";
+    addbutton.style.borderRadius = "10px"; 
+    addbutton.style.color = "black";
+
+    
+    bookWindow.appendChild(addbutton);
+
+}
+
+function confirmBtn(e) {
+    e.preventDefault();
+    
+    const title = bookDialog.querySelector("#title");
+    const author = bookDialog.querySelector("#author");
+    const pages = bookDialog.querySelector("#pages");
+    const read = bookDialog.querySelector("#read");
+    let book = new Book(title.value, author.value, pages.value, read.value);
+    //addBookToLibrary(book);
+    printBook(title, author, pages, read);
+    bookDialog.close();
 }
 
 //function printLibrary() {
