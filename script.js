@@ -78,61 +78,18 @@ function deleteLibrary () {
 //}
 
 function printBook(title, author, pages) {
-    const addbook = document.createElement("div");
-    addbook.style.backgroundColor = "#fbda4a";
-    addbook.style.borderRadius = "15px";
-    addbook.style.color = "black";
-    addbook.style.fontSize = "1.7rem";
-    addbook.style.padding = "20px 20px 10px 30px";
-    addbook.classList.add(`book-${title.value}`);
-    bookSection.appendChild(addbook);
-    const bookWindow = document.querySelector(`.book-${title.value}`);
 
-    for (x in arguments) {
-        let addline = document.createElement("div");
-        addline.style.margin = "10px";
-        addline.style.textAlign = "center";
-        if (arguments[x] === pages) {
-            addline.textContent = `${arguments[x].value} pages`;
-        } else {
-            addline.textContent = `${arguments[x].value}`;
-        }
+    createBookContainer();
 
-        //if (arguments[x] === read && ) {
-        //    addline.textContent = `READ`;
-        //} else if (arguments[x] === read && ) {
-        //    addline.textContent = `NOT READ`;
-        //}
-        bookWindow.appendChild(addline);
-    }
+    addBookText(title, author, pages);
 
-    let buttonDiv = document.createElement("div");
-    buttonDiv.classList = "btn-div";
-    buttonDiv.style.display = "flex";
-    buttonDiv.style.justifyContent = "space-around";
-    buttonDiv.style.marginTop = "40px";
+    createBookButtons();
 
-    bookWindow.appendChild(buttonDiv);
-    let addBtn = document.querySelector(".btn-div");
-
-    let addbutton = document.createElement("button");
-    let addDelete = document.createElement("button");
-    
-    styleButton(addbutton);
-    styleButton(addDelete);
-    addDelete.style.backgroundColor = "#dc2626";
-    addDelete.classList = "delete-btn";
-    addDelete.textContent = "Delete";
-    addbutton.textContent = "Read";
-
-    addBtn.appendChild(addbutton);
-    addBtn.appendChild(addDelete);
-
-    bookButtonEvents();
+    addButtonEvents();
 
 }
 
-function bookButtonEvents () {
+function addButtonEvents () {
     const readButton = document.querySelector(".read-btn");
     const deleteButton = document.querySelector(".delete-btn");
     
@@ -143,6 +100,7 @@ function bookButtonEvents () {
     readButton.addEventListener('mouseout', () => {
         readButton.style.backgroundColor = "#16a34a";
     })
+    
     //delete button :hover effect
     deleteButton.addEventListener('mouseover', () => {
         deleteButton.style.backgroundColor = "#dc262662";
@@ -151,6 +109,7 @@ function bookButtonEvents () {
         deleteButton.style.backgroundColor = "#dc2626";
     })
 
+    
     readButton.addEventListener("click", () => {
         if (readButton.textContent === "Read") {
             readButton.textContent = "Not Read";
@@ -164,7 +123,19 @@ function bookButtonEvents () {
     })
 }
 
-function styleButton(button) {   
+function createBookContainer() {
+    //create empty div for a single book entry
+    const addbook = document.createElement("div");
+    addbook.style.backgroundColor = "#fbda4a";
+    addbook.style.borderRadius = "15px";
+    addbook.style.color = "black";
+    addbook.style.fontSize = "1.7rem";
+    addbook.style.padding = "20px 20px 10px 30px";
+    addbook.classList.add(`book-${title.value}`);
+    bookSection.appendChild(addbook);
+}
+
+function styleButtonRead(button) {   
     button.classList = "read-btn";
     button.style.height = "38px";
     button.style.width = "120px";
@@ -173,6 +144,61 @@ function styleButton(button) {
     button.style.color = "white";
     button.style.backgroundColor = "#16a34a";
     button.style.borderRadius = "10px";
+    button.textContent = "Read";
 }
 
+function styleButtonDelete(button) {   
+    button.classList = "delete-btn";
+    button.style.height = "38px";
+    button.style.width = "120px";
+    button.style.marginTop = "30px";
+    button.style.fontSize = "1.3rem";
+    button.style.color = "white";
+    button.style.backgroundColor = "#dc2626";
+    button.style.borderRadius = "10px";
+    button.textContent = "Delete";
+}
 
+function createBookButtons() {
+    const bookWindow = document.querySelector(`.book-${title.value}`);
+    let buttonDiv = document.createElement("div");
+    
+    buttonDiv.classList = `btn-div-${title.value}`;
+    buttonDiv.style.display = "flex";
+    buttonDiv.style.justifyContent = "space-around";
+    buttonDiv.style.marginTop = "40px";
+    
+    bookWindow.appendChild(buttonDiv);
+    let addBtn = document.querySelector(`.btn-div-${title.value}`);
+
+    let addRead = document.createElement("button");
+    let addDelete = document.createElement("button");
+    
+    styleButtonRead(addRead);
+    styleButtonDelete(addDelete);
+
+    addBtn.appendChild(addRead);
+    addBtn.appendChild(addDelete);
+}
+
+function addBookText(title, author, pages) {
+    
+    //selects container
+    const bookWindow = document.querySelector(`.book-${title.value}`);
+
+    for (x in arguments) {
+        let addline = document.createElement("div");
+        addline.style.margin = "10px";
+        addline.style.textAlign = "center";
+
+        //add "pages" when needed
+        if (arguments[x] === pages) {
+            addline.textContent = `${arguments[x].value} pages`;
+        } else {
+            addline.textContent = `${arguments[x].value}`;
+        }
+
+        bookWindow.appendChild(addline);
+    }
+
+}
